@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="cupGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#78350F" />
+      <stop offset="100%" stop-color="#451A03" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+  </defs>
+  <!-- Background Circle -->
+  <circle cx="60" cy="60" r="56" fill="url(#cupGrad)" stroke="#F59E0B" stroke-width="3" />
+
+  <!-- Saucer -->
+  <ellipse cx="60" cy="88" rx="38" ry="6" fill="#F59E0B" opacity="0.9" />
+  <ellipse cx="60" cy="87" rx="34" ry="4" fill="#B45309" />
+
+  <!-- Cup Body -->
+  <path d="M34 46 H86 V70 C86 80 74 86 60 86 C46 86 34 80 34 70 Z" fill="#FFFBEB" stroke="#B45309" stroke-width="2" />
+
+  <!-- Cup Handle -->
+  <path d="M84 52 C94 52 96 68 84 72" stroke="#FFFBEB" stroke-width="4" stroke-linecap="round" fill="none" />
+  <path d="M84 52 C94 52 96 68 84 72" stroke="#B45309" stroke-width="1.5" stroke-linecap="round" fill="none" />
+
+  <!-- Coffee Surface -->
+  <ellipse cx="60" cy="50" rx="22" ry="4" fill="#451A03" />
+  <ellipse cx="60" cy="50" rx="16" ry="2.5" fill="#78350F" />
+  <path d="M57 50 C58 49 62 49 63 50" stroke="#FDE68A" stroke-width="1" stroke-linecap="round" fill="none" />
+
+  <!-- Steam Trails -->
+  <path d="M50 38 C48 32 54 28 50 22" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.85" />
+  <path d="M60 36 C58 30 64 26 60 20" stroke="url(#goldGrad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.95" />
+  <path d="M70 38 C68 32 74 28 70 22" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.85" />
+
+  <!-- Sparkle Accent -->
+  <circle cx="28" cy="32" r="2" fill="#FDE68A" />
+  <polygon points="28,26 30,31 35,31 31,34 32,39 28,36 24,39 25,34 21,31 26,31" fill="#F59E0B" transform="scale(0.5) translate(30, 30)" />
+</svg>

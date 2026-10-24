@@ -1,0 +1,14 @@
+{
+  "name": "siddhohum-cafe-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Siddhohum Cafe Full-Stack Restaurant Ordering System",
+  "scripts": {
+    "dev": "npm --prefix \"Sidhohum Frontend\" run dev",
+    "dev:frontend": "npm --prefix \"Sidhohum Frontend\" run dev",
+    "dev:backend": "npm --prefix \"Sidhohum Backend\" run dev",
+    "build:frontend": "npm --prefix \"Sidhohum Frontend\" run build",
+    "test:frontend": "npm --prefix \"Sidhohum Frontend\" test",
+    "test:backend": "npm --prefix \"Sidhohum Backend\" test"
+  }
+}

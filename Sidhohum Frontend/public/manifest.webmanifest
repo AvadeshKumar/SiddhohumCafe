@@ -1,0 +1,18 @@
+{
+  "name": "Siddhohum Cafe",
+  "short_name": "Siddhohum",
+  "description": "Artisan coffee, signature teas, gourmet street bites & 10-minute local express delivery.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#451A03",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
