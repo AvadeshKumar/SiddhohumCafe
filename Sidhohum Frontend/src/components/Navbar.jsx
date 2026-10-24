@@ -5,7 +5,7 @@ import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
 import { useCafe } from '../context/CafeContext'
 
-import logo from '../assets/images/siddhohum-logo.jpg'
+import logo from '../assets/images/siddhohum-logo.png'
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

@@ -4,7 +4,7 @@ import { Phone, MapPin, Clock, Mail, Shield, Heart, ExternalLink, Code2, Handsha
 import { useCafe } from '../context/CafeContext'
 
 
-import logo from '../assets/images/siddhohum-logo.jpg'
+import logo from '../assets/images/siddhohum-logo.png'
 
 export const Footer = () => {
   const { settings } = useCafe()
