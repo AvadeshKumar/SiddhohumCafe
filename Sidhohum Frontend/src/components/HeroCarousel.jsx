@@ -85,7 +85,7 @@ export const HeroCarousel = () => {
             <span className="text-amber-400">Chai & Paratha Spot</span>
           </h1>
           <p className="text-stone-300 text-sm md:text-base max-w-xl font-normal leading-relaxed">
-            From kadak chai to poha and spicy honey chilli potato, enjoy your favourite bites at pocket-friendly prices in a peaceful, nature-inspired ambience, prepared fresh and delivered in minutes.
+            {/* From kadak chai to poha and spicy honey chilli potato, enjoy your favourite bites at pocket-friendly prices in a peaceful, nature-inspired ambience, prepared fresh and delivered in minutes. */}
           </p>
         </div>
 
