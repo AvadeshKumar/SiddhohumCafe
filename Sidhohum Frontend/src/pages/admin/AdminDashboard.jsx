@@ -17,6 +17,7 @@ import api from '../../services/api'
 import { getSocket } from '../../services/socket'
 import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../context/ToastContext'
+import { useCafe } from '../../context/CafeContext'
 
 // Web Audio API notification chime generator
 const playKitchenChime = () => {
@@ -48,6 +49,8 @@ export const AdminDashboard = () => {
   const { admin, adminLogout, isAdminAuthenticated } = useAuth()
   const { showToast } = useToast()
   const navigate = useNavigate()
+  const { settings, toggleKitchenStatus } = useCafe()
+ 
 
   const [metrics, setMetrics] = useState({
     todayOrders: 0,
@@ -180,9 +183,25 @@ export const AdminDashboard = () => {
             <h1 className="font-display font-extrabold text-xl text-white">
               Vendor Control Panel
             </h1>
-            <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-amber-500 text-stone-950">
-              Kitchen Live
-            </span>
+            
+<button
+  type="button"
+  onClick={async () => {
+    try {
+      await toggleKitchenStatus()
+    } catch {
+      alert('Unable to update kitchen status. Please try again.')
+    }
+  }}
+  className={`text-[10px] font-extrabold uppercase px-2 py-1 rounded-full transition ${
+    settings?.isOpen
+      ? 'bg-emerald-500 text-white'
+      : 'bg-rose-500 text-white'
+  }`}
+>
+  {settings?.isOpen ? 'Kitchen Live' : 'Kitchen Closed'}
+</button>
+
           </div>
           <p className="text-xs text-amber-200/80 mt-0.5">
             Logged in as <strong>{admin?.name || 'Admin'}</strong>

@@ -14,7 +14,7 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     // Check for customer token or admin token depending on route or priority
-    const token = localStorage.getItem('sidhohum_admin_token') || localStorage.getItem('sidhohum_auth_token')
+    const token = localStorage.getItem('sidhohum_auth_token')
     if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }

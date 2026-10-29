@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { QRCodeSVG } from 'qrcode.react'
 import confetti from 'canvas-confetti'
 import { Sparkles } from "lucide-react";
@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 import api from '../services/api'
 import { getSocket } from '../services/socket.js'
+import { useAuth } from '../context/AuthContext'
 
 const statusOrder = [
   'PLACED',
@@ -36,10 +37,12 @@ const statusLabels = {
 
 export const OrderConfirmationPage = () => {
   const { id } = useParams()
+  const location = useLocation()
   const [order, setOrder] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [remainingSeconds, setRemainingSeconds] = useState(600) // 10 mins
+  const { isAuthenticated } = useAuth()
 
   // Fetch initial order details
   useEffect(() => {
@@ -187,33 +190,7 @@ export const OrderConfirmationPage = () => {
           </div>
         )}
 
-        {/* 10-Minute Express Countdown Bar (If Active) */}
-        {!isTerminated && order.status !== 'DELIVERED' && (
-          <div className="bg-amber-50/80 p-4 rounded-2xl border border-amber-200/80 text-left space-y-2">
-            <div className="flex items-center justify-between text-xs font-bold text-amber-900">
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-4 h-4 text-amber-700" />
-                Estimated Express Arrival
-              </span>
-              <span className="font-mono text-sm">{formatTimer(remainingSeconds)}</span>
-            </div>
-
-            <div className="w-full bg-amber-200/60 h-2.5 rounded-full overflow-hidden">
-              <div
-                className="bg-amber-600 h-full rounded-full transition-all duration-1000 shadow-sm"
-                style={{
-                  width: `${Math.max(
-                    5,
-                    Math.min(100, (1 - remainingSeconds / ((order.estimatedDeliveryMinutes || 10) * 60)) * 100)
-                  )}%`
-                }}
-              />
-            </div>
-            <p className="text-[10px] text-amber-800/80 italic">
-              Estimated local delivery target window based on neighborhood proximity.
-            </p>
-          </div>
-        )}
+        
 
         {/* Status Lifecycle Timeline */}
         {!isTerminated && (
@@ -261,35 +238,7 @@ export const OrderConfirmationPage = () => {
           </div>
         )}
 
-        {/* Secure Delivery Verification QR */}
-        {!isTerminated && order.status !== 'DELIVERED' && (
-          <div className="border-t border-stone-100 pt-5 space-y-2">
-            <p className="text-xs font-extrabold text-stone-800 flex items-center justify-center gap-1.5">
-              <QrCode className="w-4 h-4 text-amber-700" />
-              <span>Contactless Delivery Verification QR</span>
-            </p>
-            <p className="text-[11px] text-stone-500 max-w-xs mx-auto">
-              Present this unpredictable QR token to the delivery partner upon arrival for verification:
-            </p>
-
-            <div className="p-3 bg-white border border-stone-200 inline-block rounded-2xl shadow-sm mx-auto">
-              <QRCodeSVG
-                value={JSON.stringify({
-                  token: order.deliveryQrToken,
-                  orderNumber: order.orderNumber
-                })}
-                size={140}
-                level="M"
-              />
-            </div>
-
-            <div className="text-[10px] font-mono text-stone-400">
-              Verification Token: {order.deliveryQrToken?.slice(0, 8)}...
-            </div>
-          </div>
-        )}
-
-      </div>
+        </div>
 
       {/* Order Item & Payment Details Card */}
       <div className="bg-white p-5 rounded-3xl border border-stone-200/90 shadow-sm space-y-3 text-xs">
@@ -337,7 +286,7 @@ export const OrderConfirmationPage = () => {
           <div className="flex justify-between text-[11px] pt-1 text-stone-500">
             <span>Payment Mode:</span>
             <span className="font-bold text-stone-800">
-              {order.paymentMethod === 'UPI_ON_DELIVERY' ? 'UPI QR at Delivery' : 'Cash on Delivery'} (
+              {order.paymentMethod === 'UPI_ON_DELIVERY' ? 'UPI QR at Delivery' : 'Pay on Delivery'} (
               {order.paymentStatus})
             </span>
           </div>
@@ -350,6 +299,27 @@ export const OrderConfirmationPage = () => {
         </div>
       </div>
 
+      {/* Guest Login Prompt */}
+{!isAuthenticated && (
+  <div className="bg-amber-50 border border-amber-200 p-5 rounded-3xl text-center space-y-3">
+    <h3 className="font-display font-extrabold text-stone-900">
+      Want to track all your orders?
+    </h3>
+
+    <p className="text-xs text-stone-600">
+      Log in with your phone number and OTP to access your order history
+      and repeat your favourite orders.
+    </p>
+
+    <Link
+      to="/profile"
+      state={{ from: location.pathname }}
+      className="inline-flex items-center justify-center bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs px-5 py-3 rounded-xl transition"
+    >
+      Log In to Access Order History
+    </Link>
+  </div>
+)}
     </div>
   )
 }

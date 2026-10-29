@@ -10,6 +10,8 @@ import {
 } from '../services/orderService.js'
 import { emitNewOrder, emitOrderStatusUpdate } from '../services/socketService.js'
 import { verifyOtpCode } from '../services/otpService.js'
+import CafeSettings from '../models/CafeSettings.js'
+import { computeIsOpen } from './settingsController.js'
 
 // Customer: Preview and validate cart pricing & discounts before checkout
 export const validateCart = async (req, res, next) => {
@@ -30,6 +32,24 @@ export const validateCart = async (req, res, next) => {
 export const createOrder = async (req, res, next) => {
   try {
     const { customerName, customerPhone, deliveryAddress, items, paymentMethod, otpCode } = req.body
+    // Prevent new orders when the cafe is closed
+const cafeSettings = await CafeSettings.findOne()
+
+if (!cafeSettings) {
+  return res.status(503).json({
+    success: false,
+    message: 'Cafe settings are temporarily unavailable. Please try again.'
+  })
+}
+
+const isOpen = computeIsOpen(cafeSettings)
+
+if (!isOpen) {
+  return res.status(403).json({
+    success: false,
+    message: 'Sorry, Siddhohum Cafe is currently closed. Please order when we reopen.'
+  })
+}
 
     if (!customerName || !customerPhone || !deliveryAddress?.addressLine) {
       return res.status(400).json({

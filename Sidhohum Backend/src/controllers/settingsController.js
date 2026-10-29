@@ -2,7 +2,7 @@ import CafeSettings from '../models/CafeSettings.js'
 import { emitCafeSettingsUpdate } from '../services/socketService.js'
 
 // Helper: Calculate whether cafe is currently open
-const computeIsOpen = (settings) => {
+export const computeIsOpen = (settings) => {
   if (settings.isOpenOverride !== null && settings.isOpenOverride !== undefined) {
     return settings.isOpenOverride
   }

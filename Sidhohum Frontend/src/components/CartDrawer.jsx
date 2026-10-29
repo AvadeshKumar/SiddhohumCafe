@@ -84,8 +84,8 @@ export const CartDrawer = () => {
             onClick={() => setIsDrawerOpen(false)}
           />
 
-          <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-md bg-[#FAF7F2] shadow-2xl flex flex-col justify-between border-l border-stone-200">
+          <div className="fixed inset-0 sm:inset-y-0 sm:left-auto sm:right-0 sm:max-w-full flex">
+            <div className="w-screen h-full sm:w-screen sm:max-w-md bg-[#FAF7F2] shadow-2xl flex flex-col justify-between border-l border-stone-200">
 
               {/* Drawer Header */}
               <div className="p-4 bg-[#381E0D] text-white flex items-center justify-between">

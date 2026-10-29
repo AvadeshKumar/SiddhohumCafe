@@ -18,22 +18,28 @@ export const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-40 bg-[#381E0D]/95 backdrop-blur-md text-white border-b border-amber-900/50 shadow-md transition-colors">
-      <div className="max-w-6xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <div className="max-w-6xl mx-auto px-2 sm:px-4 py-2 sm:py-2.5 flex items-center justify-between gap-2">
 
         {/* Brand Logo & Name */}
-        <Link to="/" className="flex items-center gap-2.5 group">
-<img
-  src={logo}
-  alt="Siddhohum Cafe"
-  className="w-10 h-10 object-contain drop-shadow transition-transform group-hover:scale-105"
-/>          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-display font-extrabold text-lg tracking-tight text-white group-hover:text-amber-300 transition-colors">
+        <Link
+          to="/"
+          className="flex items-center gap-1.5 sm:gap-2.5 group min-w-0 flex-1"
+        >
+          <img
+            src={logo}
+            alt="Siddhohum Cafe"
+            className="w-9 h-9 sm:w-10 sm:h-10 shrink-0 object-contain drop-shadow transition-transform group-hover:scale-105"
+          />
+
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-1 sm:gap-2 min-w-0">
+              <span className="font-display font-extrabold text-sm sm:text-lg tracking-tight text-white group-hover:text-amber-300 transition-colors whitespace-nowrap">
                 {settings?.cafeName || 'Siddhohum Cafe'}
               </span>
+
               {/* Dynamic Open / Closed badge */}
               <span
-                className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                className={`text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded-full uppercase tracking-wide shrink-0 ${
                   settings?.isOpen
                     ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
                     : 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
@@ -42,6 +48,8 @@ export const Navbar = () => {
                 {settings?.isOpen ? 'Open Now' : 'Closed'}
               </span>
             </div>
+
+            {/* Tagline */}
             <div className="flex items-center gap-1.5 text-[11px] text-amber-200/90 font-medium">
               <Coffee className="w-3 h-3 text-amber-400" />
               <span>Sukoon Ka Permanent Address</span>
@@ -92,7 +100,7 @@ export const Navbar = () => {
         </nav>
 
         {/* Header Right Actions */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           {/* { Admin Switch Link }
           <Link
             to={isAdminAuthenticated ? '/admin' : '/admin/login'}
@@ -106,7 +114,7 @@ export const Navbar = () => {
           {/* User Account / Profile */}
           <Link
             to="/profile"
-            className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white transition-colors relative"
+            className="p-1.5 sm:p-2 rounded-lg bg-white/5 hover:bg-white/10 text-stone-200 hover:text-white transition-colors relative shrink-0"
             title={isAuthenticated ? user.name : 'Sign In'}
           >
             <User className="w-4 h-4" />
@@ -115,7 +123,7 @@ export const Navbar = () => {
           {/* Cart Icon & Trigger Drawer */}
           <button
             onClick={() => setIsDrawerOpen(true)}
-            className="relative flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold px-3 py-1.5 rounded-lg text-xs transition shadow-sm"
+            className="relative flex items-center gap-1 sm:gap-2 bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold px-2 sm:px-3 py-1.5 rounded-lg text-xs transition shadow-sm shrink-0"
             aria-label="View shopping cart"
           >
             <ShoppingBag className="w-4 h-4 text-stone-950" />

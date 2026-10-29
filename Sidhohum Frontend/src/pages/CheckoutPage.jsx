@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import {
@@ -22,6 +21,15 @@ export const CheckoutPage = () => {
   const { settings } = useCafe()
   const { showToast } = useToast()
   const navigate = useNavigate()
+
+  // Start checkout at the top of the page
+useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  })
+}, [])
 
   // Form fields
   const [customerName, setCustomerName] = useState(user?.name || '')
@@ -160,11 +168,23 @@ export const CheckoutPage = () => {
         paymentMethod,
       }
 
-      const res = await api.post('/orders', orderPayload)
+      
+const res = await api.post('/orders', orderPayload)
 
-      clearCart()
-      showToast('Order placed successfully!', 'success')
-      navigate(`/orders/${res.order.id}`)
+console.log('Order API response:', res)
+
+const orderId = res?.order?._id || res?.order?.id
+
+if (!orderId) {
+  console.error('Order ID missing from API response:', res)
+  showToast('Order placed, but the order ID was not returned.', 'error')
+  return
+}
+
+clearCart()
+showToast('Order placed successfully!', 'success')
+window.location.href = `/orders/${orderId}`
+
     } catch (err) {
       showToast(
         err.message || 'Failed to place your order. Please try again.',
@@ -431,10 +451,6 @@ export const CheckoutPage = () => {
                 {submitting ? 'Placing Order...' : 'Place Order'}
               </span>
             </button>
-
-            <div className="text-[11px] text-stone-400 text-center">
-              ⚡ Guaranteed fresh preparation within estimated 10-min window.
-            </div>
           </div>
         </div>
       </div>
